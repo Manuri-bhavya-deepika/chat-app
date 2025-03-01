@@ -11,7 +11,7 @@ const Createproject: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [projectTechStack, setProjectTechStack] = useState('');
-  const [skillsNeeded, setSkillsNeeded] = useState('');
+  // const [skillsNeeded, setSkillsNeeded] = useState('');
   const [status, setStatus] = useState('');
   const [images, setImages] = useState<File[]>([]); 
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,9 @@ const Createproject: React.FC = () => {
   const [techStackError, setTechStackError] = useState<string | null>(null);
   const [statusError, setStatusError] = useState<string | null>(null);
   const [skills, setSkills] = useState<{ value: string; label: string }[]>([]);
-  const [selectedSkills, setSelectedSkills] = useState<{ value: string; label: string }[]>([]);
+  const [selectedTechStack, setSelectedTechStack] = useState<{ value: string; label: string }[]>([]);
+  // const [selectedSkills, setSelectedSkills] = useState<{ value: string; label: string }[]>([]);
+  const [selectedSkillsNeeded, setSelectedSkillsNeeded] = useState<{ value: string; label: string }[]>([]);
   const cardRef = useRef<HTMLDivElement>(null);
 
   // Handle file selection
@@ -53,11 +55,11 @@ const Createproject: React.FC = () => {
       setDescriptionError('Description is required');
       formValid = false;
     }
-    if (!projectTechStack) 
-    {
+    if (selectedTechStack.length === 0) {
       setTechStackError('Tech stack is required');
       formValid = false;
     }
+    
     if (!status) 
     {
       setStatusError('Status is required');
@@ -79,8 +81,10 @@ const Createproject: React.FC = () => {
       const payload = {
         title,
         description,
-        projectTechStack: projectTechStack.split(',').map((tech) => tech.trim()), 
-        skillsNeeded: skillsNeeded.split(',').map((skill) => skill.trim()), 
+        // projectTechStack: projectTechStack.split(',').map((tech) => tech.trim()),
+        projectTechStack: selectedTechStack.map(tech => tech.value), 
+        // skillsNeeded: skillsNeeded.split(',').map((skill) => skill.trim()), 
+        skillsNeeded: selectedSkillsNeeded.map(skill => skill.value),
         status,
       };
 
@@ -96,7 +100,8 @@ const Createproject: React.FC = () => {
       setTitle('');
       setDescription('');
       setProjectTechStack('');
-      setSkillsNeeded('');
+      // setskillsNeeded('');
+      setSelectedSkillsNeeded([]);
       setStatus('');
     } catch (err: any) {
       console.error('Error creating project:', err);
@@ -171,46 +176,42 @@ const Createproject: React.FC = () => {
             }}
           />
           <div>
-            <label className="block text-sm font-medium text-black pt-3">Tech Stacks</label>
-            <Select
-            options={skills}
-            isMulti
-            onChange={(selectedOptions) => setSelectedSkills(selectedOptions as { value: string; label: string }[])}
-            className="mt-2 w-full rounded-md"
-            placeholder="Search or select skills..."
-            styles={{
-              control: (base, state) => ({
-                ...base,
-                borderColor: state.isFocused ? 'gray' : 'gray',
-                boxShadow: 'none',
-                '&:hover': {
-                  borderColor: 'gray'
-                }
-              })
-            }}
-          />
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-black pt-3">Skills Required</label>
-          <Select
-          options={skills}
-          isMulti
-          onChange={(selectedOptions) => setSelectedSkills(selectedOptions as { value: string; label: string }[])}
-          className="mt-2 w-full rounded-md"
-          placeholder="Search or select skills..."
-          styles={{
-            control: (base, state) => ({
-              ...base,
-              borderColor: state.isFocused ? 'gray' : 'gray',
-              boxShadow: 'none',
-              '&:hover': {
-                borderColor: 'gray'
-              }
-            })
-          }}
-        />
-      </div>
+  <label className="block text-sm font-medium text-black pt-3">Tech Stacks</label>
+  <Select
+    options={skills}
+    isMulti
+    onChange={(selectedOptions) => setSelectedTechStack(selectedOptions as { value: string; label: string }[])}
+    className="mt-2 w-full rounded-md"
+    placeholder="Search or select tech stacks..."
+    styles={{
+      control: (base, state) => ({
+        ...base,
+        borderColor: state.isFocused ? 'gray' : 'gray',
+        boxShadow: 'none',
+        '&:hover': { borderColor: 'gray' }
+      })
+    }}
+  />
+</div>
+
+<div>
+  <label className="block text-sm font-medium text-black pt-3">Skills Required</label>
+  <Select
+    options={skills}
+    isMulti
+    onChange={(selectedOptions) => setSelectedSkillsNeeded(selectedOptions as { value: string; label: string }[])}
+    className="mt-2 w-full rounded-md"
+    placeholder="Search or select skills..."
+    styles={{
+      control: (base, state) => ({
+        ...base,
+        borderColor: state.isFocused ? 'gray' : 'gray',
+        boxShadow: 'none',
+        '&:hover': { borderColor: 'gray' }
+      })
+    }}
+  />
+</div>
 
           
           <div className="pt-4">
