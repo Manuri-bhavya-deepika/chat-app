@@ -158,7 +158,7 @@ const Createproject: React.FC = () => {
             value={title}
             onChange={(e) => {
               const value = e.target.value;
-              if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
+              if (/^[a-zA-Z\s!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|-]*$/.test(value) || value === "") {
                 setTitle(value);
               }
             }}
@@ -168,12 +168,7 @@ const Createproject: React.FC = () => {
             label="Description"
             placeholder="Enter project description"
             value={description}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
-                setDescription(value);
-              }
-            }}
+            onChange={(e) => setDescription(e.target.value)}
           />
           <div>
   <label className="block text-sm font-medium text-black pt-3">Tech Stacks</label>
