@@ -120,7 +120,8 @@ const UpdateUserProfile: React.FC = () => {
     if (socialLinks.github && !/^(https?:\/\/)?(www\.)?github\.com\/[A-Za-z0-9_-]+$/.test(socialLinks.github)) {
       validationErrors.push("GitHub link must be a valid URL.");
     }
-    if (socialLinks.linkedin && !/^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+$/.test(socialLinks.linkedin)) {
+    if (socialLinks.linkedin && !/^(https?:\/\/)?(www\.)?linkedin\.com\/(in|pub|company)\/[A-Za-z0-9_-]+\/?$/.test(socialLinks.linkedin)) 
+    {
       validationErrors.push("LinkedIn link must be a valid URL.");
     }
     if (selectedSkills.length === 0) {
@@ -239,13 +240,25 @@ const UpdateUserProfile: React.FC = () => {
             label="First Name"
             placeholder="Enter first name"
             value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            // onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Blocks numbers, allows everything else
+                setFirstName(value);
+              }
+            }}
           />
           <Inputbox
             label="Last Name"
             placeholder="Enter last name"
             value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
+            // onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Blocks numbers, allows everything else
+                setLastName(value);
+              }
+            }}
           />
           <Inputbox
             label="Bio"
@@ -313,7 +326,13 @@ const UpdateUserProfile: React.FC = () => {
             label="College Name"
             placeholder="Enter college name"
             value={collegeName}
-            onChange={(e) => setCollegeName(e.target.value)}
+            // onChange={(e) => setCollegeName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Blocks numbers, allows everything else
+                setCollegeName(value);
+              }
+            }}
           />
           <div className="pt-4">
             <div className="mb-6 px-4">
@@ -334,7 +353,7 @@ const UpdateUserProfile: React.FC = () => {
                   value={exp.companyName}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
+                    if (/^[^0-9]*$/.test(value)) { // Blocks numbers, allows everything else
                       handleInputChange(index, "companyName", value, setExperience);
                     }
                   }}
@@ -345,9 +364,7 @@ const UpdateUserProfile: React.FC = () => {
                   value={exp.title}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
-                      handleInputChange(index, "title", value, setExperience);
-                    }
+                    handleInputChange(index, "title", value, setExperience); // No restrictions
                   }}
                 />
                 <Inputbox
@@ -356,9 +373,7 @@ const UpdateUserProfile: React.FC = () => {
                   value={exp.description}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
-                      handleInputChange(index, "description", value, setExperience);
-                    }
+                    handleInputChange(index, "description", value, setExperience);
                   }}
                 />
                 <button
