@@ -131,17 +131,17 @@ const Createproject: React.FC = () => {
 
 
   return (
-    <div className="flex bg-slate-300 justify-center items-center min-h-screen pr-24 flex-col overflow-x-hidden">
+    <div className="flex bg-slate-300 justify-center items-center min-h-screen px-4 flex-col overflow-x-hidden">
+
       <Navbar />
-      <div className="flex bg-slate-300 w-full ml-16 mr-8 md:ml-72">
-        <div className="flex flex-col justify-center w-full max-w-xl mx-auto ">
-          <div className="mt-12 text-sm sm:text-lg md:text-2xl text-left whitespace-nowrap w-full px-4">
+      <div className="flex bg-slate-300 w-full ml-16 mr-8 md:ml-40  lg:ml-72">
+        <div className="flex flex-col justify-center w-full max-w-md mx-auto ">
+          <div className="text-sm sm:text-lg md:text-2xl text-left whitespace-nowrap w-full px-4">
             <Heading label="Create Project" />
           </div>
           <div
           ref={cardRef}
-          className="bg-white rounded-lg p-6 my-4 shadow-md flex flex-col justify-between h-auto w-[280px] sm:w-[320px] md:w-[400px] lg:w-[500px]"
-          >
+          className="bg-white rounded-lg p-6 my-4 shadow-md flex flex-col justify-center w-full max-w-sm sm:max-w-md md:max-w-lg">
 
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
           {success && <p className="text-green-500 text-sm mb-2">{success}</p>}
