@@ -11,7 +11,6 @@ const Createproject: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [projectTechStack, setProjectTechStack] = useState('');
-  // const [skillsNeeded, setSkillsNeeded] = useState('');
   const [status, setStatus] = useState('');
   const [images, setImages] = useState<File[]>([]); 
   const [error, setError] = useState<string | null>(null);
@@ -22,7 +21,6 @@ const Createproject: React.FC = () => {
   const [statusError, setStatusError] = useState<string | null>(null);
   const [skills, setSkills] = useState<{ value: string; label: string }[]>([]);
   const [selectedTechStack, setSelectedTechStack] = useState<{ value: string; label: string }[]>([]);
-  // const [selectedSkills, setSelectedSkills] = useState<{ value: string; label: string }[]>([]);
   const [selectedSkillsNeeded, setSelectedSkillsNeeded] = useState<{ value: string; label: string }[]>([]);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -163,50 +161,53 @@ const Createproject: React.FC = () => {
               }
             }}
           />
-          
-          <Inputbox
-            label="Description"
+          <div className="pt-4">
+            <label className="block text-sm font-medium text-gray-700">Description</label>
+            <textarea
             placeholder="Enter project description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-          />
+            className="mt-2 border border-gray-300 p-2 w-full h-32 rounded-md resize-none overflow-y-auto"
+            />
+          </div>
+          
           <div>
-  <label className="block text-sm font-medium text-black pt-3">Tech Stacks</label>
-  <Select
-    options={skills}
-    isMulti
-    onChange={(selectedOptions) => setSelectedTechStack(selectedOptions as { value: string; label: string }[])}
-    className="mt-2 w-full rounded-md"
-    placeholder="Search or select tech stacks..."
-    styles={{
-      control: (base, state) => ({
-        ...base,
-        borderColor: state.isFocused ? 'gray' : 'gray',
-        boxShadow: 'none',
-        '&:hover': { borderColor: 'gray' }
-      })
-    }}
-  />
-</div>
-
-<div>
-  <label className="block text-sm font-medium text-black pt-3">Skills Required</label>
-  <Select
-    options={skills}
-    isMulti
-    onChange={(selectedOptions) => setSelectedSkillsNeeded(selectedOptions as { value: string; label: string }[])}
-    className="mt-2 w-full rounded-md"
-    placeholder="Search or select skills..."
-    styles={{
-      control: (base, state) => ({
-        ...base,
-        borderColor: state.isFocused ? 'gray' : 'gray',
-        boxShadow: 'none',
-        '&:hover': { borderColor: 'gray' }
-      })
-    }}
-  />
-</div>
+            <label className="block text-sm font-medium text-black pt-3">Tech Stacks</label>
+            <Select
+            options={skills}
+            isMulti
+            onChange={(selectedOptions) => setSelectedTechStack(selectedOptions as { value: string; label: string }[])}
+            className="mt-2 w-full rounded-md"
+            placeholder="Search or select tech stacks..."
+            styles={{
+              control: (base, state) => ({
+                ...base,
+                borderColor: state.isFocused ? 'gray' : 'gray',
+                boxShadow: 'none',
+                '&:hover': { borderColor: 'gray' }
+              })
+            }}
+          />
+        </div>
+        
+        <div>
+          <label className="block text-sm font-medium text-black pt-3">Skills Required</label>
+          <Select
+          options={skills}
+          isMulti
+          onChange={(selectedOptions) => setSelectedSkillsNeeded(selectedOptions as { value: string; label: string }[])}
+          className="mt-2 w-full rounded-md"
+          placeholder="Search or select skills..."
+          styles={{
+            control: (base, state) => ({
+              ...base,
+              borderColor: state.isFocused ? 'gray' : 'gray',      
+              boxShadow: 'none',
+              '&:hover': { borderColor: 'gray' }
+            })
+          }}
+        />
+      </div>
 
           
           <div className="pt-4">
