@@ -1,18 +1,15 @@
 //used firebase
-
-
-
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDEoc0o3NZcKF77iN-6S3QB3SKLmIfFcfc",
-  authDomain: "AIzaSyDEoc0o3NZcKF77iN-6S3QB3SKLmIfFcfc",
-  databaseURL: "https://collab-d0353-default-rtdb.firebaseio.com",
-  projectId: "collab-d0353",
-  storageBucket: "collab-d0353.firebasestorage.app",
-  messagingSenderId: "217438984607",
-  appId: "1:217438984607:web:f48f99d877efd7651345aa",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
