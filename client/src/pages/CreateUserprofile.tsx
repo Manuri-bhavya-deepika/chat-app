@@ -299,7 +299,7 @@ const Createuserprofile: React.FC = () => {
                   value={exp.companyName}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
+                    if (/^[^0-9]*$/.test(value)) { // This allows anything except numbers
                       handleInputChange(index, "companyName", value, setExperience);
                     }
                   }}
@@ -313,15 +313,15 @@ const Createuserprofile: React.FC = () => {
                     handleInputChange(index, "title", value, setExperience); // No restrictions
                   }}
                 />
-                <Inputbox
-                  label="Description"
+                <div className="pt-4">
+                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                  <textarea
                   placeholder="Enter description"
                   value={exp.description}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    handleInputChange(index, "description", value, setExperience);
-                  }}
-                />
+                  onChange={(e) => handleInputChange(index, "description", e.target.value, setExperience)}
+                  className="mt-2 border border-gray-300 p-2 w-full h-20 rounded-md resize-none overflow-y-auto"
+                  />
+                </div>
                 <button
                   onClick={() => handleRemoveExperience(index)}
                   className="absolute top-2 right-2 text-black-500 text-sm">
