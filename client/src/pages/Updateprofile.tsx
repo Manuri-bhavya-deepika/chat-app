@@ -240,13 +240,23 @@ const UpdateUserProfile: React.FC = () => {
             label="First Name"
             placeholder="Enter first name"
             value={firstname}
-            onChange={(e) => setFirstName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Allows anything except numbers
+              setFirstName(value);
+            }
+          }}
           />
           <Inputbox
             label="Last Name"
             placeholder="Enter last name"
             value={lastname}
-            onChange={(e) => setLastName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Allows anything except numbers
+              setLastName(value);
+            }
+          }}
           />
           <Inputbox
             label="Bio"
@@ -314,7 +324,12 @@ const UpdateUserProfile: React.FC = () => {
             label="College Name"
             placeholder="Enter college name"
             value={collegeName}
-            onChange={(e) => setCollegeName(e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              if (/^[^0-9]*$/.test(value)) { // Allows anything except numbers
+              setCollegeName(value);
+            }
+          }} 
           />
           <div className="pt-4">
             <div className="mb-6 px-4">
@@ -346,22 +361,19 @@ const UpdateUserProfile: React.FC = () => {
                   value={exp.title}
                   onChange={(e) => {
                     const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
-                      handleInputChange(index, "title", value, setExperience);
-                    }
+                    handleInputChange(index, "title", value, setExperience); // No restrictions
                   }}
                 />
-                <Inputbox
-                  label="Description"
+                <div className="pt-4">
+                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                  <textarea
                   placeholder="Enter description"
                   value={exp.description}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    if (/^[a-zA-Z\s]*$/.test(value)) {
-                      handleInputChange(index, "description", value, setExperience);
-                    }
-                  }}
-                />
+                  onChange={(e) => handleInputChange(index, "description", e.target.value, setExperience)}
+                  className="mt-2 border border-gray-300 p-2 w-full h-32 rounded-md resize-none overflow-y-auto"
+                  />
+                </div>
+
                 <button
                   onClick={() => handleRemoveExperience(index)}
                   className="absolute top-2 right-2 text-black-500 text-sm">
