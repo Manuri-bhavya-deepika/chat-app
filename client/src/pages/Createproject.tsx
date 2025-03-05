@@ -245,25 +245,18 @@ const Createproject: React.FC = () => {
               label="Title"
               placeholder="Enter project title"
               value={title}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
-                  setTitle(value);
-                }
-              }}
+              onChange={(e) => setTitle(e.target.value)}
             />
-
-            <Inputbox
-              label="Description"
+            
+            <div className="pt-4">
+              <label className="block text-sm font-medium text-gray-700">Description</label>
+              <textarea
               placeholder="Enter project description"
               value={description}
-              onChange={(e) => {
-                const value = e.target.value;
-                if (/^[a-zA-Z\s]*$/.test(value) || value === "") {
-                  setDescription(value);
-                }
-              }}
-            />
+              onChange={(e) => setDescription(e.target.value)}
+              className="mt-2 border border-gray-300 p-2 w-full h-20 rounded-md resize-none overflow-y-auto"
+              />
+           </div>
 
             <div>
               <label className="block text-sm font-medium text-black pt-3">Project Tech Stack</label>
